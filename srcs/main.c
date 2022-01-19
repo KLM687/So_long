@@ -35,8 +35,16 @@ int main(int argc, char **argv)
 {   
     t_game *game;
     
-    if (!check_ber(argv[1]) || argc != 2)
+    if (argc != 2)
+    {
+        printf("error\n./so_long map.ber\n");
         return (EXIT_FAILURE);
+    }
+    else if (!check_ber(argv[1]))
+    {
+        printf("error\n./so_long map.ber\n");
+        return (EXIT_FAILURE);
+    }
     game = malloc(sizeof(t_game));
     if (!game)
         return(EXIT_FAILURE);
@@ -45,7 +53,5 @@ int main(int argc, char **argv)
         printf("map is incomplete\n");
     else
         game_start(game);
-    //ft_free_tab(game->map.map);
-    //free(game);
     return (EXIT_SUCCESS);
 }

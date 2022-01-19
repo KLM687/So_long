@@ -27,23 +27,33 @@ t_game *open_img(t_game *game)
     return (game);
 }
 
+void    img_addr(t_game *game)
+{
+    game->floor.addr = mlx_get_data_addr(game->floor.img, &game->floor.byte_p, &game->floor.line_l, &game->floor.end);
+    game->wall.addr = mlx_get_data_addr(game->wall.img, &game->wall.byte_p, &game->wall.line_l, &game->wall.end);
+    game->item.addr = mlx_get_data_addr(game->item.img, &game->item.byte_p, &game->item.line_l, &game->item.end);
+    game->floor.addr = mlx_get_data_addr(game->exit.img, &game->exit.byte_p, &game->exit.line_l, &game->exit.end);
+    game->floor.addr = mlx_get_data_addr(game->gummy.img, &game->gummy.byte_p, &game->gummy.line_l, &game->gummy.end);
+}
+
 void    put_img(t_game *game, size_t x, size_t y)
 {
     if (game->map.map[x][y] == '1')
         mlx_put_image_to_window(game->mxl.mlx, game->mxl.windows, 
-            game->wall.img, x * img_size, y * img_size);
+            game->wall.img, y * img_size, x * img_size);
     else if (game->map.map[x][y] == '0')
         mlx_put_image_to_window(game->mxl.mlx, game->mxl.windows, 
-            game->floor.img, x * img_size, y * img_size);
+            game->floor.img, y * img_size, x * img_size);
     else if (game->map.map[x][y] == 'C')
         mlx_put_image_to_window(game->mxl.mlx, game->mxl.windows, 
-            game->item.img, x * img_size, y * img_size);
+            game->item.img, y * img_size, x * img_size);
     else if (game->map.map[x][y] == 'E')
         mlx_put_image_to_window(game->mxl.mlx, game->mxl.windows, 
-            game->exit.img, x * img_size, y * img_size);
+            game->exit.img, y * img_size, x * img_size);
     else if (game->map.map[x][y] == 'P')
         mlx_put_image_to_window(game->mxl.mlx, game->mxl.windows, 
-            game->gummy.img, x * img_size, y * img_size);
+            game->gummy.img, y * img_size, x * img_size);
+    img_addr(game);
 }
 
 void    display(t_game *game)
@@ -70,9 +80,10 @@ void    game_start(t_game *game)
     game->mxl.w_x = game->map.x * img_size;
     game->mxl.w_y = game->map.y * img_size;
     game->mxl.windows = mlx_new_window(game->mxl.mlx, 
-        game->mxl.w_x, game->mxl.w_y, "./so_long");
+        game->mxl.w_y, game->mxl.w_x, "./so_long");
     game = open_img(game);
     display(game);
     mlx_key_hook(game->mxl.windows, input, game);
+    mlx_hook(game->mxl.windows, 33, 1l << 5, free_and_destroy, game);
     mlx_loop(game->mxl.mlx);
 }

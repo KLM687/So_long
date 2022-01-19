@@ -73,6 +73,7 @@ t_game  *move_down(t_game *game);
 void    display(t_game *game);
 void    put_img(t_game *game, size_t x, size_t y);
 bool    check_exit(t_game *game);
+int     free_and_destroy(t_game *game);
 
 size_t	ft_strlen_gnl(const char *str, size_t state);
 size_t	ft_strlcpy_gnl(char *dest, const char *src, size_t size);
