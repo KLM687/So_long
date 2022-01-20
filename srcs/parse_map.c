@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-bool check_size(t_game *game)
+t_game *check_size(t_game *game)
 {
     size_t i;
     size_t a;
@@ -20,24 +20,31 @@ bool check_size(t_game *game)
 
     i = 0;
     a = ft_strlen_gnl(game->map.map[i], 1);
-    while (game->map.map[i])
+    game->map.y = a;
+    while (i < game->map.x)
     {
         b = ft_strlen_gnl(game->map.map[i], 1);
+        printf("b = %zu\n",b);
         if (b != a)
-            return (FALSE);
+        {
+            printf("Map is not rectangular\n");
+            free_and_destroy(game, 0);
+            exit (EXIT_FAILURE);
+        }
         i++;
     }
-    printf("BOUM\n");
-    return (TRUE);
+    return (game);
 }
 
-bool elem_check(char c)
+void elem_check(char c, t_game *game)
 {
-    printf("%c\n", c);
-    if (c != '1' || c != 'E' || c != '0' 
-        || c != 'P' || c != 'C')
-        return (TRUE);
-    return(FALSE);
+    if (c != '1' && c != 'E' && c != '0' 
+        && c != 'P' && c != 'C')
+    {
+        printf("invalid element !\n");
+        free_and_destroy(game, 0);
+        exit (EXIT_FAILURE);
+    }
 }
 
 bool check_elem(t_game *game)
@@ -46,14 +53,12 @@ bool check_elem(t_game *game)
     size_t y;
 
     x = 0;
-    while (game->map.map[x])
+    while (x < game->map.x)
     {
         y = 0;
-        while (game->map.map[x][y] != '\n' 
-                && game->map.map[x][y])
+        while (y < game->map.y)
         {
-            if (elem_check(game->map.map[x][y]))
-                return (FALSE);
+            elem_check(game->map.map[x][y], game);
             y++;
         }
         x++;
@@ -65,12 +70,8 @@ t_game *check_map(t_game *game)
 {
     if (check_size(game))
     {
-        printf("size ok\n");
         if (check_elem(game))
-        {
-            printf("elem ok\n");
             return (game);
-        }
     }
-    return (NULL);
+    return (game);
 }

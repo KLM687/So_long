@@ -14,19 +14,19 @@
 
 bool    check_exit(t_game *game)
 {
-    if (game->map.pick == game->map.collectible)
-    {
-      free_and_destroy(game);
-      return (TRUE);
-    }
-    return (FALSE);
+  if (game->map.pick == game->map.collectible)
+  {
+    free_and_destroy(game, 1000);
+    return (TRUE);
+  }
+  return (FALSE);
 }
 
 int input(int key, t_game *game)
 {
   if (key == 65307)
     {
-      free_and_destroy(game);
+      free_and_destroy(game, 1);
     }
 	else if (key == 119)
   {

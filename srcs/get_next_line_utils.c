@@ -17,6 +17,9 @@ size_t	ft_strlen_gnl(const char *str, size_t state)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
+	printf("enter len\n");
 	if (state == 0)
 	{
 		if (str == NULL)
@@ -29,6 +32,7 @@ size_t	ft_strlen_gnl(const char *str, size_t state)
 		while (str[i] != '\0' && str[i] != '\n')
 			i++;
 	}
+	printf("i = %zu\n", i);
 	return (i);
 }
 

@@ -48,7 +48,10 @@ bool    wall(char *str)
     while (*str != '\n' && *str != '\0')
     {
         if (*str != '1')
+        {
+            printf("missing wall\n");
             return (FALSE);
+        }
         str++;
     }
     return (TRUE);
@@ -61,11 +64,18 @@ t_game *parse_wall(t_game *game)
     i = 0;
     game->map.y = ft_strlen_gnl(game->map.map[0], 1);
     if (!wall(game->map.map[0]) || !wall(game->map.map[game->map.x - 1]))
-        return (NULL);
-    while (i < game->map.x)
+    {
+        free_and_destroy(game, 0);
+        exit(EXIT_FAILURE);
+    }
+    while (i < game->map.x && !game->error)
     {
         if (game->map.map[i][0] != '1' || game->map.map[i][game->map.y - 1] != '1')
-            return(NULL);
+        {
+            printf("missing wall\n");
+            free_and_destroy(game, 0);
+            exit(EXIT_FAILURE);
+        }
         i++;
     }
     return (game);
@@ -78,18 +88,17 @@ t_game *map_init(char **argv, t_game *game)
     game->map.exit = 0;
     game->player.player = 0;
     game->map.move = 0;
+    game->error = 0;
     game = get_map(argv[1], game);
-    printf("test\n");
     game = check_map(game);
-    printf("exit test\n");
-    if (!game)
+    game = parse_wall(game);
+    game = parse_elem(game);
+    if (game->map.collectible == 0 || game->map.exit == 0 
+            || game->player.player != 1)
+    {
+        printf("missing element\n");
+        free_and_destroy(game, 0);
         exit(EXIT_FAILURE);
-    if (game)
-        game = parse_wall(game);
-    if (game)
-        game = parse_elem(game);
-    if (game->map.collectible > 0 && game->map.exit > 0 
-            && game->player.player == 1)
-        return (game);
-    return (FALSE);
+    }
+    return (game);
 }

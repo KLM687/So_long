@@ -49,9 +49,6 @@ int main(int argc, char **argv)
     if (!game)
         return(EXIT_FAILURE);
     game = map_init(argv, game);
-    if (!game)
-        printf("map is incomplete\n");
-    else
-        game_start(game);
+    game_start(game);
     return (EXIT_SUCCESS);
 }

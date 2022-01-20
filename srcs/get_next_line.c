@@ -17,6 +17,8 @@ size_t	ft_check_gnl(char *memory)
 	size_t	i;
 
 	i = 0;
+	if(memory == NULL)
+		return (0);
 	while (memory[i] != '\0')
 	{
 		if (memory[i] == '\n')

@@ -12,7 +12,7 @@
 
 # define FALSE 0
 # define TRUE 1
-# define BUFFER_SIZE 9999
+# define BUFFER_SIZE 99999
 # define img_size 64 
 
 typedef struct s_map
@@ -60,6 +60,7 @@ typedef struct s_game
     t_img       floor;
     t_img       exit;
     t_img       item;
+    int         error;
 }   t_game;
 
 t_game  *map_init(char **argv, t_game *game);
@@ -73,8 +74,7 @@ t_game  *move_down(t_game *game);
 void    display(t_game *game);
 void    put_img(t_game *game, size_t x, size_t y);
 bool    check_exit(t_game *game);
-int     free_and_destroy(t_game *game);
-bool    check_size(t_game *game);
+int     free_and_destroy(t_game *game, int step);
 t_game  *check_map(t_game *game);
 
 size_t	ft_strlen_gnl(const char *str, size_t state);
