@@ -30,19 +30,19 @@ int input(int key, t_game *game)
     }
 	else if (key == 119)
   {
-		game = move_up(game);
+        game = move_left(game);
   } 
 	else if (key == 97)
   {
-		game = move_left(game);
+        game = move_up(game);
   }
 	else if (key == 100)
   {
-		game = move_right(game);
+        game = move_down(game);
   }
 	else if (key == 115)
   {
-		game = move_down(game);
+        game = move_right(game);
   }
     display(game);
 	return (0);

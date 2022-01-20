@@ -12,7 +12,7 @@
 
 NAME= so_long
 
-SRCS= main.c map_init.c get_map.c get_next_line_utils.c get_next_line.c game_start.c hooks.c move.c  clean.c \
+SRCS= main.c map_init.c get_map.c get_next_line_utils.c get_next_line.c game_start.c hooks.c move.c  clean.c parse_map.c \
 
 OBJS			=	${addprefix srcs/,${SRCS:.c=.o}}
 
