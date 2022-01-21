@@ -60,7 +60,7 @@ char	*ft_fill_memory_gnl(char *memory, char buf[BUFFER_SIZE + 1], int fd)
 char	*get_next_line(int fd)
 {
 	static char	*memory;
-	static char *ok;
+	static char	*ok;
 	char		buf[BUFFER_SIZE + 1];
 	char		*line;
 

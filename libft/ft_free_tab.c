@@ -6,21 +6,21 @@
 /*   By: flee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 19:39:28 by flee              #+#    #+#             */
-/*   Updated: 2022/01/09 19:39:30 by flee             ###   ########.fr       */
+/*   Updated: 2022/01/21 10:17:50 by flee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_free_tab(char **str)
+void	ft_free_tab(char **str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        free(str[i]);
-        i++;
-    }
-    free(str);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

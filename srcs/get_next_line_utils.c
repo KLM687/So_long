@@ -59,7 +59,7 @@ char	*ft_strjoin_gnl(char *s1, char const *s2, size_t read_return)
 {
 	size_t		cmpt1;
 	size_t		cmpt2;
-	char	*str;
+	char		*str;
 
 	if (s2)
 	{
@@ -102,7 +102,7 @@ size_t	ft_strlcpy_gnl(char *dest, const char *src, size_t size)
 
 char	*ft_substr_gnl(char *s, size_t start, size_t len, size_t state)
 {
-	char	*tab;
+	char		*tab;
 	size_t		len1;
 	size_t		len2;
 	size_t		i;

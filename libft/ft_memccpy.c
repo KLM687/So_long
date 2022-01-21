@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	*ft_memccpy (void *d, const void *s, int c, size_t si)
+void	*ft_memccpy(void *d, const void *s, int c, size_t si)
 {
 	char			*a;
 	char			*b;
