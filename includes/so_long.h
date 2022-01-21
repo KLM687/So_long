@@ -72,7 +72,7 @@ typedef struct s_game
 	t_img		floor;
 	t_img		exit;
 	t_img		item;
-	int 		step;
+	int			step;
 }	t_game;
 
 t_game	*map_init(char **argv, t_game *game);
@@ -88,7 +88,7 @@ void	put_img(t_game *game, size_t x, size_t y);
 bool	check_exit(t_game *game);
 int		free_and_destroy(t_game *game, int step);
 t_game	*check_map(t_game *game);
-int    	free_and_destroy2(t_game *game);
+int		free_and_destroy2(t_game *game);
 void	check_img(t_game *game);
 
 size_t	ft_strlen_gnl(const char *str, size_t state);

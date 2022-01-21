@@ -12,6 +12,19 @@
 
 #include "so_long.h"
 
+t_game	*player(t_game *game, size_t x, size_t y)
+{
+	if (game->player.player == 0)
+	{
+		game->player.player++;
+		game->player.x = x;
+		game->player.y = y;
+	}
+	else
+		game->map.map[x][y] = '1';
+	return (game);
+}
+
 t_game	*parse_elem(t_game *game)
 {
 	size_t	x;
@@ -28,11 +41,7 @@ t_game	*parse_elem(t_game *game)
 			else if (game->map.map[x][y] == 'E')
 				game->map.exit++;
 			else if (game->map.map[x][y] == 'P')
-			{
-				game->player.player++;
-				game->player.x = x;
-				game->player.y = y;
-			}
+				game = player(game, x, y);
 			y++;
 		}
 		x++;

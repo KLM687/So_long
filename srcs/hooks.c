@@ -16,6 +16,7 @@ bool	check_exit(t_game *game)
 {
 	if (game->map.pick == game->map.collectible)
 	{
+		printf("GG\n");
 		free_and_destroy(game, 1000);
 		return (TRUE);
 	}
