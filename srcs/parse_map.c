@@ -24,7 +24,6 @@ t_game *check_size(t_game *game)
     while (i < game->map.x)
     {
         b = ft_strlen_gnl(game->map.map[i], 1);
-        printf("b = %zu\n",b);
         if (b != a)
         {
             printf("Map is not rectangular\n");

@@ -17,8 +17,6 @@ size_t	ft_check_gnl(char *memory)
 	size_t	i;
 
 	i = 0;
-	if(memory == NULL)
-		return (0);
 	while (memory[i] != '\0')
 	{
 		if (memory[i] == '\n')
@@ -51,8 +49,10 @@ char	*ft_fill_memory_gnl(char *memory, char buf[BUFFER_SIZE + 1], int fd)
 			return (memory);
 		}
 		if (read_return != 0)
+		{
 			memory = ft_strjoin_gnl(memory, buf, read_return);
-		check = ft_check_gnl(memory);
+			check = ft_check_gnl(memory);
+		}
 	}
 	return (memory);
 }
@@ -60,17 +60,21 @@ char	*ft_fill_memory_gnl(char *memory, char buf[BUFFER_SIZE + 1], int fd)
 char	*get_next_line(int fd)
 {
 	static char	*memory;
+	static char *ok;
 	char		buf[BUFFER_SIZE + 1];
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (ok != NULL)
+		return (line);
 	memory = ft_fill_memory_gnl(memory, buf, fd);
-	if (!memory)
+	if (memory == NULL)
 		return (NULL);
-	if (memory[0] == '\0')
+	if (memory[0] == 0 && ok == NULL)
 	{
+		ok = "STOP";
 		free(memory);
 		return (NULL);
 	}

@@ -17,11 +17,10 @@ void    free_map(t_game *game)
     size_t i;
 
     i = 0;
-    while (i <= game->map.x)
+    while (i < game->map.x)
     {
-        printf("%s",game->map.map[i]);
         free(game->map.map[i]);
-        i++;
+        i++;   
     }
     free(game->map.map);
 }

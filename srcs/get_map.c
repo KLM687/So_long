@@ -12,12 +12,10 @@ char **fill_map(char *map, char **map_ret, int x)
         exit (EXIT_FAILURE);
     }
     i = 0;
-    printf("x = %d\n",x);
     while (i <= x)
     {
         line = get_next_line(fd);
         map_ret[i] = line;
-        printf("%s",line);
         i++;
     }
     close (fd);
@@ -45,7 +43,7 @@ int get_x(char *file)
 		if (read_ret == 0)
 			break ;
 		if (read_ret < 0)
-			exit(EXIT_FAILURE);
+			return (-1);
 		if (c == '\n')
 			x++;
 	}
@@ -57,20 +55,20 @@ t_game *get_map(char *file, t_game *game)
 {
     int     x;
     
-    x = (get_x(file) + 1);
-    game->map.x = x - 1;
+    x = get_x(file);
+    game->map.x = x;
     if (x <= 2)
     {
         printf("missing wall\n");
         free_and_destroy(game, -1);
         exit(EXIT_FAILURE);
     }
-    game->map.map = malloc(sizeof(char *) * x);
+    game->map.map = malloc(sizeof(char *) * (x + 1));
     if (!game->map.map)
     {
         free_and_destroy(game, -1);
         exit (EXIT_FAILURE);
     }
-    game->map.map = fill_map(file, game->map.map, game->map.x);
+    game->map.map = fill_map(file, game->map.map, x);
     return (game);
 }
